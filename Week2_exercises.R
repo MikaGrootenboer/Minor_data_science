@@ -29,3 +29,23 @@ eba = eba1977
 ebacase = eba$cases
 summary(ebacase) # mean = 9.333 , 3rd quartile = 11
 boxplot(ebacase) # no outliers are shown
+#exersice 1: b
+eba = eba1977
+summary(eba)
+# 6 values for each city,4 values for each age group.
+#exersice 1: c
+#to put 2 plots in the view -> par(mfrow=c(2,1))
+hist(eba$case[eba$city =="Fredericia"],xlim=c(0,16),ylim=c(0,4),col = "grey")
+hist(eba$case[eba$city =="Vejle"],xlim = c(0,16), ylim = c(0,4))
+#the cases are more spread out in Vejli compared to Fredericia
+#exersice 1: d
+plot(eba$cases ~ eba$city)
+plot(eba$cases ~ eba$age)
+#exersice 1: e
+tapply(eba$cases, eba$city, mean)
+tapply(eba$cases, eba$age, mean)
+#age group 65-69 has the highest average with 11.25, and Fredericia has the highest average with 10.666667
+#exersice 2
+#NANIIIIIII
+
+
