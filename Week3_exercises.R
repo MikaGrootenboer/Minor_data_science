@@ -55,3 +55,31 @@ sqrt(2000*0.04*(1-0.04))
 
 #Poisson distribution 
 #exercise 1:
+dpois(4,4) # x=4
+1-dpois(0,4) #x=!0
+sum(dpois(0:5,4))#<6
+sum(dpois(0:6,4)) # =<6
+sum(dpois(3:6,4)) #>2
+sum(dpois(2:6,4)) # >=2
+sum(dpois(1:5,4)) # =< 1 , =<5
+sum(dpois(3,4)) # >2 , < 4
+sum(dpois(3:5,4)) # =<3 , < 6
+#exercise 2:
+#A
+dpois(10,12)
+#B
+sum(dpois(0:4,12))
+#C
+sum(dpois(10:11,12))
+#D
+sum(dpois(8:14,12))
+#E
+1 - ppois(17,12)
+#exercse 3:
+dpois(7,5)
+#exercise 4:
+sum(dpois(0:1,3.2))
+#exercise 5:
+1 - ppois(6,6)
+#exercie 6:
+sum(dpois(0:2,9.4))
