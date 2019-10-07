@@ -4,22 +4,22 @@
 sum(dbinom(1:25,25,0.25))
 #exercise 2:
 #x=12  n=20 p=0.33
-dbinom(12,20,0.33)
+dbinom(12,20,1/3)
 #exercise 3:
 #x=48 n=50 p = 0.5, 1- because the succses is not the inaccurate results but accurate results.
-1-dbinom(48,50,0.5)
+dbinom(48,50,(1-1/100))
 #exercise 4:
 #x=1:2 n=3 p=0.166
-sum(dbinom(1:3,3,0.33))
-barplot(dbinom(1:3,3,0.33))
+dbinom(0:3,3,1/3)
+barplot(dbinom(0:3,3,1/3))
 #exercise 5:
 #n = 500 p=1/5
 500*(1/5)
 #exercise 6:
 #sqrt(np(1-p))
 #A 
-60*0.33
-sqrt(60*0.33*(1-0.33))
+60*1/3
+sqrt(60*1/3*(1-1/3))
 #B
 10*(1/6)
 sqrt(10*(1/6)*(1-(1/6)))
@@ -32,7 +32,7 @@ sqrt(15*0.8*(1-0.8))
 #exercise 8:
 sum(dbinom(400:500,500,0.75))
 #exercise 9:
-dbinom(1,20,(1/7))
+sum(dbinom(3:20,20,(1/7)))
 #exercise 10:
 #1
 dbinom(500,1000,0.5)
@@ -74,7 +74,7 @@ sum(dpois(10:11,12))
 #D
 sum(dpois(8:14,12))
 #E
-1 - ppois(17,12)
+1 - ppois(16,12)
 #exercse 3:
 dpois(7,5)
 #exercise 4:
@@ -82,4 +82,4 @@ sum(dpois(0:1,3.2))
 #exercise 5:
 1 - ppois(6,6)
 #exercie 6:
-sum(dpois(0:2,9.4))
+sum(dpois(0:1,9.4))
