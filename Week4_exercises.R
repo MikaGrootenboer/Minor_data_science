@@ -8,9 +8,23 @@
 (110-110)/11 #0
 #D
 (129-110)/11 #1.727273
-
-
-
+#e
+dev = 11
+mean = 110
+pnorm(90,mean,dev)
+#f
+1- pnorm(120,mean,dev)
+#g
+pnorm(140,mean,dev)-pnorm(115,mean,dev)
+#exercise 2: 
+dev = 0.5
+mean = 502
+#a
+pnorm(501.5,mean,dev)*100
+#b
+(1- pnorm(502.4,mean,dev))*100
+#c
+(pnorm(502.4,mean,dev)-pnorm(501.5,mean,dev))*100
 
 
 
