@@ -1,6 +1,6 @@
 #set the correct wd by setwd("{place of dir}")
 #create a variable for the dataset
-plane_data = read.csv("Airplane_Crashes.csv")
+plane_data = read.csv("Airplane_Crashes2.csv")
 
 #install 2 libraries to filter the summary for categories
 # dplyr and stringr
