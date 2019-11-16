@@ -87,7 +87,9 @@ ui = dashboardPage(skin = "blue",
       #second item in the menu
       menuItem("Mapping",tabName="map",icon = icon("map") ),
       #last item in the menu
-      menuItem("Table data", tabName = "table", icon = icon("th") )
+      menuItem("Table data", tabName = "table", icon = icon("th") ),
+      
+      menuItem("Data information", tabName = "information", icon = icon("question") )
       
     )
   ),
@@ -107,7 +109,7 @@ ui = dashboardPage(skin = "blue",
 
       #mapping tab
       tabItem(tabName="map",
-              h2("map of all the accidents with the summary"),
+              h2("Map of all the accidents with summary"),
               leafletOutput("mymap")),
       
       # Second tab content
@@ -116,7 +118,27 @@ ui = dashboardPage(skin = "blue",
               dataTableOutput("table")
               
               
+      ),
+      tabItem(tabName = "information",
+              h2("Information page"),
+              box(title = "Data information", status = "primary", solidHeader = TRUE, collapsible = TRUE,
+                  p("The dataset that is being used on this site is a dataset called 'Airplane Crash Data Since 1908' from Kaggle.com. You can find more information about each column of the data set at https://www.kaggle.com/cgurkan/airplane-crash-data-since-1908"
+                    )),
+              box(title = "Filter options", status = "primary", solidHeader = TRUE, collapsible = TRUE,
+                  p("You will find a filter tab in the sidebar menu, in this tab you can filter the three different plots given on the 'plane accidents' page.  The first filter called ' Cause of accident' will have effect on the Piechart and the Barplot. While the second filter called 'Year slider' will have effect on the Lineplot."
+                    )),
+              box(title = "Map", status = "primary", solidHeader = TRUE, collapsible = TRUE,
+                  p("In the sidebar menu is an item called Mapping, on this page you can see the world map with at the moment five different locations of a place an airplane has crashed. The reason only five markers are showing is because it wasn't possible to convert all the locations to longitude and latitude because of the Google API."
+                    )),
+              box(title = "Table", status = "primary", solidHeader = TRUE, collapsible = TRUE,
+                  p("In the sidebar menu is an item called Table data, on this page you can search for a specific accident. The search bar at the top right filters on everything in the data set. For example you can try to find a crash that is related to terrorism if you type 'terrorism' in the search bar, or you can search for a specific location of a crash by typing a location in the search bar."
+                  ))
+              
+              
+              
       )
+      
+      
       
     )
   )
