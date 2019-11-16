@@ -15,6 +15,7 @@ small_df = read.csv("small_df.csv")
 shinyUI(dashboardPage(skin = "blue",
                    #this is the name of the 
                    dashboardHeader(title = "Plane accidents"),
+                   
                    dashboardSidebar(
                      sidebarMenu(
                        #first item in the menu
