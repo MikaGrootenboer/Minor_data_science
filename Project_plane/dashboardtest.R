@@ -50,9 +50,9 @@ small_df$lng[5] = 3.515625
 small_df$lat[5] = 56.511018
 
 #############################################UI####################################################
-ui = dashboardPage(
+ui = dashboardPage(skin = "blue",
   #this is the name of the 
-  dashboardHeader(title = "Plane crashes"),
+  dashboardHeader(title = "Plane accidents"),
   dashboardSidebar(
     sidebarMenu(
       #first item in the menu
@@ -62,8 +62,8 @@ ui = dashboardPage(
       #this is the filter menu for the first itmem
       menuItem("filters",tabName="plot_filter",icon = icon("dashboard"),
        checkboxGroupInput("cause", label = h3("Cause of accident"),
-       choices = list("Crashed" = "Crash","Shot" = "Shot" ,"Struck by lightning" = "lightning",
-       "Caught fire" = "Caught fire", "Exploded" = "Explode"),selected = c("Crash","Shot","lightning","Caught fire", "Explode")),
+       choices = list("Crashed" = "Crash","Shot" = "Shot" ,"Struck by something" = "Struck",
+       "Caught fire" = "Fire", "Exploded" = "Explode","Engine problems"="Engine"),selected = c("Crash","Shot","Struck","Fire", "Explode","Engine")),
        
        
        sliderInput("slider2", label = h3("Year slider"), min = 0, 
@@ -88,10 +88,11 @@ ui = dashboardPage(
       tabItem(tabName = "dashboard",
               
               #this is the checkbox that will give the user the option to choose from different categories of crashes.
-              
-              box(plotOutput("pie")),
-              box(plotOutput("bar")),
-              box(plotOutput("plot"))
+             fluidRow(
+              box( title = "Piechart ", status = "primary", solidHeader = TRUE, collapsible = TRUE, plotOutput("pie")),
+              box( title = "Barplot", status = "primary", solidHeader = TRUE, collapsible = TRUE, plotOutput("bar")),
+              box( title = "Lineplot", status = "primary", solidHeader = TRUE,collapsible = TRUE, plotOutput("plot"))
+             )
       ),
       
 
@@ -122,8 +123,10 @@ server = function(input,output){
                                 nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[2], ignore_case=TRUE)))),
                                 nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[3], ignore_case=TRUE)))),
                                 nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[4], ignore_case=TRUE)))),
-                                nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[5], ignore_case=TRUE))))),
-                              c(input$cause), col = rainbow(8), radius = 0.9,main = "different type of accidents compaired to eachother"))
+                                nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[5], ignore_case=TRUE)))),
+                                nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[6], ignore_case=TRUE))))
+                                ),
+                              c(input$cause), col = rainbow(8), radius = 0.9,main = "Types of accidents compaired to eachother"))
   
   
   
@@ -131,11 +134,12 @@ server = function(input,output){
                                     nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[2], ignore_case=TRUE)))),
                                     nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[3], ignore_case=TRUE)))),
                                     nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[4], ignore_case=TRUE)))),
-                                    nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[5], ignore_case=TRUE))))
-  ),names.arg = c(input$cause[1],input$cause[2],input$cause[3],input$cause[4],input$cause[5]),col = rainbow(8),main="barplot of the amount of each accident",ylab = "amount of accidents",xlab = "type of accident"))
+                                    nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[5], ignore_case=TRUE)))),
+                                    nrow(plane_withsum %>% filter(str_detect(plane_withsum$Summary,fixed(input$cause[6], ignore_case=TRUE))))
+  ),names.arg = c(input$cause[1],input$cause[2],input$cause[3],input$cause[4],input$cause[5],input$cause[6]),col = rainbow(8),main="Barplot of the amount of each accident",ylab = "amount of accidents",xlab = "type of accident"))
   
   output$plot <- renderPlot({
-    plot(x = year_set$year ,xlim=c(input$slider2[1],input$slider2[2]),y=year_set$amount, ylab="amount of crashes", xlab="year",main = "amount of crashes each year")
+    plot(x = year_set$year ,xlim=c(input$slider2[1],input$slider2[2]),y=year_set$amount, ylab="amount of crashes", xlab="year",main = "Accidents each year")
     
   })
   
