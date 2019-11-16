@@ -1,3 +1,10 @@
+###############################################################################
+#This is the Project of Mika Grootenboer
+#Subject: Airplane crashes
+#Question: Find the reason for the crash, and categorize them in clusters (like Fire, Shot Down, Weather, ...)
+#I also put my project online with shinyapps.io
+#https://mikagrootenboer-airplane-crashes.shinyapps.io/airplane-crashes-deploy/
+###############################################################################
 #libs needed for the app to run
 #install.packages("shiny")
 #install.packages("dplyr")
@@ -11,28 +18,30 @@ library(shinydashboard)
 library(leaflet)
 #import the plane crash data from the csv file.
 plane_data = read.csv("Airplane_Crashes2.csv")
+year_set = read.csv("year_set.csv")
 # remove the empty summary field and put it in a new variable.
 plane_withsum = plane_data
 plane_withsum = plane_withsum[rowSums(is.na(plane_withsum))==0,]
 plane_withsum = plane_withsum[plane_withsum$Summary!="",]
 
-#create a new dataset to get the amount of crashes each year
-new_plane = plane_withsum
-new_plane$Date = substr(new_plane$Date,start=7,stop=10)
-year_set = data.frame()
-for(i in unique(new_plane$Date)){
-  
-  newrow = data.frame(year=i,amount=nrow(dplyr::filter(plane_withsum, grepl(i, plane_withsum$Date))))
-  year_set = rbind(year_set,newrow)
-}
+# the code below was only used to create the year_set data set 
+#new_plane = plane_withsum
+#new_plane$Date = substr(new_plane$Date,start=7,stop=10)
+#year_set = data.frame()
+#for(i in unique(new_plane$Date)){
+#  
+#  newrow = data.frame(year=i,amount=nrow(dplyr::filter(plane_withsum, grepl(i, plane_withsum$Date))))
+#  year_set = rbind(year_set,newrow)
+#}
+#write.csv(year_set,"year_set.csv")
+
+
 #https://www.jessesadler.com/post/geocoding-with-r/
-#todo add the longetude and latitude to the data frame, connect them with the location name.
-#plane_cities
-#cities = distinct(plane_cities,Location)
+#//todo add the longetude and latitude to the data frame, connect them with the location name.
+#cities = distinct(plane_withsum,Location)
 #cities_df = as.data.frame(cities)
 #geolocation = mutate_geocode(cities_df,Location)
 #new_plane_withsum = merge(plane_withsum,geolocation,by="Location")
-
 #to show how i would display the mapped content i created a small data frame and added the longitude and latitude with hand.
 small_df = plane_withsum[0:5,]
 small_df$lng = 0
@@ -66,8 +75,8 @@ ui = dashboardPage(skin = "blue",
        "Caught fire" = "Fire", "Exploded" = "Explode","Engine problems"="Engine"),selected = c("Crash","Shot","Struck","Fire", "Explode","Engine")),
        
        
-       sliderInput("slider2", label = h3("Year slider"), min = 0, 
-                   max = 109, value = c(90, 109))
+       sliderInput("slider2", label = h3("Year slider"), min = 1908, 
+                   max = 2019, value = c(2000, 2019))
        
        
        
@@ -139,7 +148,7 @@ server = function(input,output){
   ),names.arg = c(input$cause[1],input$cause[2],input$cause[3],input$cause[4],input$cause[5],input$cause[6]),col = rainbow(8),main="Barplot of the amount of each accident",ylab = "amount of accidents",xlab = "type of accident"))
   
   output$plot <- renderPlot({
-    plot(x = year_set$year ,xlim=c(input$slider2[1],input$slider2[2]),y=year_set$amount, ylab="amount of crashes", xlab="year",main = "Accidents each year")
+    plot(x = year_set$year,type="l",xlim=c(input$slider2[1],input$slider2[2]),y=year_set$amount, ylab="amount of crashes", xlab="year",main = "Accidents each year")
     
   })
   

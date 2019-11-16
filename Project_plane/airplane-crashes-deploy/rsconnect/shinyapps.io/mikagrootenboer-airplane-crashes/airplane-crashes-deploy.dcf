@@ -1,0 +1,10 @@
+name: airplane-crashes-deploy
+title:
+username:
+account: mikagrootenboer-airplane-crashes
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1481275
+bundleId: 2594040
+url: https://mikagrootenboer-airplane-crashes.shinyapps.io/airplane-crashes-deploy/
+when: 1573920832.50976
