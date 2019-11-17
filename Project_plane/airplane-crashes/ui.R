@@ -11,7 +11,6 @@ year_set = read.csv("year_set.csv")
 small_df = read.csv("small_df.csv")
 
 
-#############################################UI####################################################
 shinyUI(dashboardPage(skin = "blue",
                    #this is the name of the 
                    dashboardHeader(title = "Plane accidents"),

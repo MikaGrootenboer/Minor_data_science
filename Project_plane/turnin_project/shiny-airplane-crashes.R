@@ -35,9 +35,8 @@ plane_withsum = plane_withsum[plane_withsum$Summary!="",]
 #}
 #write.csv(year_set,"year_set.csv")
 
-
-#https://www.jessesadler.com/post/geocoding-with-r/
 #//todo add the longetude and latitude to the data frame, connect them with the location name.
+#https://www.jessesadler.com/post/geocoding-with-r/
 #cities = distinct(plane_withsum,Location)
 #cities_df = as.data.frame(cities)
 #geolocation = mutate_geocode(cities_df,Location)
