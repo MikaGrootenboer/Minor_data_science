@@ -1,0 +1,36 @@
+P(label|feature) = P(feature|label) * P(label) / P(feature)
+P(survival | male)
+
+
+
+label = positief, 98% accurate
+feature = teveel gredronken, 1 op de 25
+
+
+4% heeft teveel gedronken
+96% heeft niet teveel gedronken
+
+1 op de 25 mensen hebben teveel gedronken met een sensiviteit van 98%
+(0,04*1)/0,98 = 0,04    (67%)
+
+1 op de 100 mensen hebben teveel gedronken met een sensiviteit van 98%
+
+(0,01*1)/0,98= 0.010    (33%)
+
+
+
+
+
+(0,98 * 0,04 / (0,04*0,98 + 0,96*0,02) = 0,67 = 67%
+
+
+Positief | teveel gredronken) = P(feature|label) * P(label) / P(feature)
+
+P(1/25|0,98) *P(0,98)/P(1/25)
+
+
+(1/25)/0,98
+
+0,04/0,98 = 0,04 or 24,5
+
+1/0,98 = 0.010
