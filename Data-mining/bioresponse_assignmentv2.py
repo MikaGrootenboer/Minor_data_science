@@ -18,17 +18,17 @@ test_data = pd.read_csv(filepath_test)
 
 train_noanser = train_data.iloc[:,1:len(train_data)]
 train_anser = train_data.iloc[:,0]
-#train_anser = y.to_frame()
-    
-gb_clf = GradientBoostingClassifier(verbose=1,n_estimators=20,learning_rate=0.1, max_features=600)
 
+#create the gradiant boost classifier with the corresponding params
+gb_clf = GradientBoostingClassifier(n_estimators=300,max_features=700,verbose=1)
+#fir the training set
 gb_clf.fit(train_noanser,train_anser)
-
+#predict the Activity with the test_dat set.
 gb_clfprob = gb_clf.predict_proba(test_data)
-#random_forest_1_probabilities = pd.DataFrame(GBC.predict_proba(test_data))
 
-# export data for kaggle score
-#bio_response_prediction = pd.DataFrame()
-#bio_response_prediction['MoleculeId'] = [int(x) for x in range(1, len(test_data) + 1)]
-#bio_response_prediction['PredictedProbability'] = random_forest_1_probabilities.iloc[:,1]
-#bio_response_prediction.to_csv(os.sep.join(data_path + ['bio_resp_rft.csv']), index = None, header=True)
+
+#creating new pd.DataFrame to export for the competition
+comp_response = pd.DataFrame()
+comp_response['MoleculeId'] = [int(x) for x in range(1, len(gb_clfprob) + 1)]
+comp_response['PredictedProbability'] = gb_clfprob[:,1]
+#comp_response.to_csv('bioresponse_10000.csv',index=None, header=True)
